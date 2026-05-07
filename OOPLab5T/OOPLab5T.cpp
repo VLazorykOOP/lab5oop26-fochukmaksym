@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <cstring>
 #include <cmath>
@@ -7,9 +7,7 @@
 
 using namespace std;
 
-// ======================================================
 // TASK 1: Pair -> RightAngled
-// ======================================================
 
 class Pair {
 protected:
@@ -65,9 +63,8 @@ public:
     }
 };
 
-// ======================================================
+
 // TASK 2: Engine -> Car -> Truck (composition)
-// ======================================================
 
 class Engine {
 private:
@@ -132,9 +129,8 @@ public:
     }
 };
 
-// ======================================================
+
 // TASK 3: Furniture -> Table (copy + move)
-// ======================================================
 
 class Furniture {
 protected:
@@ -147,21 +143,18 @@ public:
         cout << "Furniture created\n";
     }
 
-    // COPY
     Furniture(const Furniture& other) {
         material = new char[strlen(other.material) + 1];
         strcpy(material, other.material);
         cout << "Furniture copied\n";
     }
 
-    // MOVE
     Furniture(Furniture&& other) noexcept {
         material = other.material;
         other.material = nullptr;
         cout << "Furniture moved\n";
     }
 
-    // COPY ASSIGN
     Furniture& operator=(const Furniture& other) {
         if (this != &other) {
             delete[] material;
@@ -172,7 +165,6 @@ public:
         return *this;
     }
 
-    // MOVE ASSIGN
     Furniture& operator=(Furniture&& other) noexcept {
         if (this != &other) {
             delete[] material;
@@ -221,19 +213,16 @@ public:
         cout << "Table created\n";
     }
 
-    // COPY
     Table(const Table& other)
         : Furniture(other), legs(other.legs) {
         cout << "Table copied\n";
     }
 
-    // MOVE
     Table(Table&& other) noexcept
         : Furniture(move(other)), legs(other.legs) {
         cout << "Table moved\n";
     }
 
-    // ASSIGN
     Table& operator=(const Table& other) {
         if (this != &other) {
             Furniture::operator=(other);
@@ -243,7 +232,6 @@ public:
         return *this;
     }
 
-    // MOVE ASSIGN
     Table& operator=(Table&& other) noexcept {
         if (this != &other) {
             Furniture::operator=(move(other));
@@ -267,9 +255,7 @@ public:
     }
 };
 
-// ======================================================
-// INPUT METHODS
-// ======================================================
+
 
 void inputKeyboard() {
     double a, b;
@@ -308,9 +294,6 @@ void inputRandom() {
     r.print();
 }
 
-// ======================================================
-// TESTS
-// ======================================================
 
 void test1() {
     cout << "\nTEST 1\n";
@@ -336,9 +319,6 @@ void test3() {
     cout << t3 << endl;
 }
 
-// ======================================================
-// MAIN
-// ======================================================
 
 int main() {
     srand(time(0));
